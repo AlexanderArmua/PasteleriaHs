@@ -1,5 +1,10 @@
 module Reposteria where
 
+    -- Links de los ejercicios
+    -- Guia de ejercicio: https://docs.google.com/document/d/1npn4TLMdS7yh5s0w3Xo9yeMTrYBjSk4VoWgbejlDlR4/edit?ts=5aeb8968
+    -- Guia casi resuelta: https://docs.google.com/document/d/1cJhLsBe7mSby_GGFDGpeYdrg71KmyMEHHJzciN5uF-4/edit?ts=5aec74ef
+
+
 data Receta = Receta {
     cucharadasDeHarina :: Int,
     cucharadasDeAzucar :: Int,
@@ -102,6 +107,23 @@ cuantoPuedoTardar cliente = criterioDePaciencia cliente (ordenesCliente cliente 
     d) Desarrollar la funcion clienteSatisfecho
 -}
 
+-- Punto a
+cuantoSeNecesita :: String -> Int
+cuantoSeNecesita "harina" = sum (map cucharadasDeHarina (map receta (filter (not.fueCancelada) ordenesPasteleria)))
+cuantoSeNecesita "aceite" = sum (map cucharadasDeAceite (map receta (filter (not.fueCancelada) ordenesPasteleria)))
+cuantoSeNecesita "huevos" = sum (map cantidadDeHuevos (map receta (filter (not.fueCancelada) ordenesPasteleria)))
+cuantoSeNecesita "azucar" = sum (map cucharadasDeAzucar (map receta (filter (not.fueCancelada) ordenesPasteleria)))
+cuantoSeNecesita "leche"  = sum (map cucharadasDeLeche (map receta (filter (not.fueCancelada) ordenesPasteleria)))
 
+-- Punto b
+tienePocoTrabajo :: Bool
+tienePocoTrabajo = (length (filter (not.fueCancelada) ordenesPasteleria) < 10) || (length (filter (not.saleBien) (map receta (filter (not.fueCancelada) ordenesPasteleria))) == 0)
 
+-- Punto c
+-- Hay que evaluar si tiene Poco trabajo o no y en base a eso calcular por cada orden
+--cuantoTarda :: Orden -> Int
+
+-- Punto d
+-- Hay que evaluar que si la orden tarda menos de lo que el cliente esta dispuesto a esperar
+--clienteSatisfecho :: Cliente -> Bool
 
